@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Mr.Xun</title>
+  <title>MrXunのBlog</title>
   
-  
+  <subtitle>欢迎光临</subtitle>
   <link href="/mrxun/atom.xml" rel="self"/>
   
   <link href="http://mrxun_jn.gitee.io/mrxun/"/>
