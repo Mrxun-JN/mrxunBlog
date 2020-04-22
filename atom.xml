@@ -3,11 +3,11 @@
   <title>Mr.Xun</title>
   
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="/mrxun/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://mrxun_jn.gitee.io/mrxun/"/>
   <updated>2020-04-22T02:45:15.331Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://mrxun_jn.gitee.io/mrxun/</id>
   
   <author>
     <name>Mr.Xun</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>感谢相识，不计消失</title>
-    <link href="http://yoursite.com/2020/04/22/hello-world/"/>
-    <id>http://yoursite.com/2020/04/22/hello-world/</id>
+    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/22/hello-world/"/>
+    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/22/hello-world/</id>
     <published>2020-04-22T02:45:15.359Z</published>
     <updated>2020-04-22T02:45:15.331Z</updated>
     
