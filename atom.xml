@@ -6,7 +6,7 @@
   <link href="/mrxun/atom.xml" rel="self"/>
   
   <link href="http://mrxun_jn.gitee.io/mrxun/"/>
-  <updated>2020-04-24T09:18:08.755Z</updated>
+  <updated>2020-04-25T12:18:34.696Z</updated>
   <id>http://mrxun_jn.gitee.io/mrxun/</id>
   
   <author>
@@ -18,16 +18,16 @@
   
   <entry>
     <title>开始搭建你自己的hexo</title>
-    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/24/tech1/"/>
-    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/24/tech1/</id>
-    <published>2020-04-24T09:18:08.799Z</published>
-    <updated>2020-04-24T09:18:08.755Z</updated>
+    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/25/startHexo/"/>
+    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/25/startHexo/</id>
+    <published>2020-04-25T12:19:18.608Z</published>
+    <updated>2020-04-25T12:18:34.696Z</updated>
     
-    <content type="html"><![CDATA[<p>这篇文章纯属灌水～～～</p><a id="more"></a><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>一些简单的hexo命令</p><a id="more"></a><h2 id="学习搭建自己的hexo博客"><a href="#学习搭建自己的hexo博客" class="headerlink" title="学习搭建自己的hexo博客"></a>学习搭建自己的hexo博客</h2><h3 id="上传文章"><a href="#上传文章" class="headerlink" title="上传文章"></a>上传文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="启动hexo服务"><a href="#启动hexo服务" class="headerlink" title="启动hexo服务"></a>启动hexo服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="更新静态页面"><a href="#更新静态页面" class="headerlink" title="更新静态页面"></a>更新静态页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><h3 id="上传到码云"><a href="#上传到码云" class="headerlink" title="上传到码云"></a>上传到码云</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;这篇文章纯属灌水～～～&lt;/p&gt;
+      &lt;p&gt;一些简单的hexo命令&lt;/p&gt;
     
     </summary>
     
@@ -43,12 +43,12 @@
   
   <entry>
     <title>感谢相识，不计消失</title>
-    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/24/hello-world/"/>
-    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/24/hello-world/</id>
-    <published>2020-04-24T05:32:34.580Z</published>
-    <updated>2020-04-24T05:32:34.552Z</updated>
+    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/"/>
+    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/</id>
+    <published>2020-04-25T12:17:32.065Z</published>
+    <updated>2020-04-25T12:17:32.033Z</updated>
     
-    <content type="html"><![CDATA[<p>感谢你曾经来过，可是我只是个过客</p><a id="more"></a><h2 id="学习搭建自己的hexo博客"><a href="#学习搭建自己的hexo博客" class="headerlink" title="学习搭建自己的hexo博客"></a>学习搭建自己的hexo博客</h2><h3 id="上传文章"><a href="#上传文章" class="headerlink" title="上传文章"></a>上传文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="启动hexo服务"><a href="#启动hexo服务" class="headerlink" title="启动hexo服务"></a>启动hexo服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="更新静态页面"><a href="#更新静态页面" class="headerlink" title="更新静态页面"></a>更新静态页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<p>感谢你曾经来过，可是我只是个过客</p><a id="more"></a>]]></content>
     
     <summary type="html">
     
@@ -56,8 +56,6 @@
     
     </summary>
     
-    
-      <category term="胡言乱语" scheme="http://mrxun_jn.gitee.io/mrxun/categories/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/"/>
     
     
       <category term="胡言乱语" scheme="http://mrxun_jn.gitee.io/mrxun/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/"/>
