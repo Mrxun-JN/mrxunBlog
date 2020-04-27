@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mrxun_jn.gitee.io/mrxun/about/index.html</loc>
+    
+    <lastmod>2020-04-27T01:17:01.450Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://mrxun_jn.gitee.io/mrxun/2020/04/25/startHexo/</loc>
     
     <lastmod>2020-04-25T13:56:08.617Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/</loc>
     
     <lastmod>2020-04-25T12:24:24.655Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrxun_jn.gitee.io/mrxun/about/index.html</loc>
-    
-    <lastmod>2020-04-24T09:14:04.993Z</lastmod>
     
   </url>
   
