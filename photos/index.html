@@ -14,25 +14,25 @@
 
 
 <link rel="stylesheet" href="/mrxun/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"mrxun_jn.gitee.io","root":"/mrxun/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"mrxun_jn.gitee.io","root":"/mrxun/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="感谢你曾经来过，可是我只是个过客">
-<meta property="og:type" content="article">
-<meta property="og:title" content="感谢相识，不计消失">
-<meta property="og:url" content="http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/index.html">
+  <meta name="description" content="照片美如画       图片正在加载中…      (function() {     var loadScript &#x3D; function(path) {       var $script &#x3D; document.createElement(&#39;script&#39;)       document.getElementsByTagName(&#39;body&#39;)[0].appendChild">
+<meta property="og:type" content="website">
+<meta property="og:title" content="相册">
+<meta property="og:url" content="http://mrxun_jn.gitee.io/mrxun/photos/index.html">
 <meta property="og:site_name" content="MrXunのBlog">
-<meta property="og:description" content="感谢你曾经来过，可是我只是个过客">
-<meta property="article:published_time" content="2020-04-25T12:24:24.691Z">
-<meta property="article:modified_time" content="2020-04-25T12:24:24.655Z">
+<meta property="og:description" content="照片美如画       图片正在加载中…      (function() {     var loadScript &#x3D; function(path) {       var $script &#x3D; document.createElement(&#39;script&#39;)       document.getElementsByTagName(&#39;body&#39;)[0].appendChild">
+<meta property="article:published_time" content="2020-04-29T06:57:26.113Z">
+<meta property="article:modified_time" content="2020-04-29T06:57:26.089Z">
 <meta property="article:author" content="Mr.Xun">
-<meta property="article:tag" content="胡言乱语">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/">
+<link rel="canonical" href="http://mrxun_jn.gitee.io/mrxun/photos/">
 
 
 <script id="page-configurations">
@@ -40,12 +40,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-Hans'
   };
 </script>
 
-  <title>感谢相识，不计消失 | MrXunのBlog</title>
+  <title>相册 | MrXunのBlog
+</title>
   
 
 
@@ -76,10 +77,54 @@
   </style>
 </noscript>
 
+  <script type="text/javascript" src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
+  <script src="/mrxun/js/src/photoswipe.min.js"></script>
+  <script src="/mrxun/js/src/photoswipe-ui-default.js"></script>
 <link rel="alternate" href="/mrxun/atom.xml" title="MrXunのBlog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader-active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
   <div class="container use-motion">
     <div class="headband"></div>
 
@@ -130,6 +175,11 @@
     <a href="/mrxun/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/mrxun/photos/" rel="section"><i class="fa fa-paw fa-fw"></i>相册</a>
+
+  </li>
         <li class="menu-item menu-item-关于">
 
     <a href="/mrxun/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
@@ -178,143 +228,70 @@
       <div class="main-inner">
         <div class="content-wrap">
           
+  
+  
 
-          <div class="content post posts-expand">
+          <div class="content page posts-expand">
             
 
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/mrxun/images/mrxun.jpg">
-      <meta itemprop="name" content="Mr.Xun">
-      <meta itemprop="description" content="<br/>风住尘香花已尽<br/>日晚倦梳头<br/>物是人非事事休<br/>欲语泪先流<br/>闻说双溪春尚好<br/>也拟泛轻舟<br/>只恐双溪舴艋舟<br/>载不动许多愁<br/>">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MrXunのBlog">
-    </span>
+    
+    
+    <div class="post-block" lang="zh-Hans">
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          感谢相识，不计消失
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+<h1 class="post-title" itemprop="name headline">相册
+</h1>
 
-              <time title="Created: 2020-04-25 20:24:24" itemprop="dateCreated datePublished" datetime="2020-04-25T20:24:24+08:00">2020-04-25</time>
-            </span>
-
-          
-            <span id="/mrxun/2020/04/25/hello-world/" class="post-meta-item leancloud_visitors" data-flag-title="感谢相识，不计消失" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
+<div class="post-meta">
   
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/mrxun/2020/04/25/hello-world/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/mrxun/2020/04/25/hello-world/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>50</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
 
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <p>感谢你曾经来过，可是我只是个过客</p>
-<a id="more"></a>
-
-<p>点开这篇文章的你应该更有兴趣点开 “关于”，</p>
-<p>你我的故事或许从这里开始。</p>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Post author:  </strong>Mr.Xun
-  </li>
-  <li class="post-copyright-link">
-    <strong>Post link: </strong>
-    <a href="http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/" title="感谢相识，不计消失">http://mrxun_jn.gitee.io/mrxun/2020/04/25/hello-world/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
-  </li>
-</ul>
 </div>
 
+</header>
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/mrxun/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/" rel="tag"># 胡言乱语</a>
-          </div>
+      
+      
+      
+      <div class="post-body">
+          <link rel="stylesheet" href="./ins.css">
+<link rel="stylesheet" href="./photoswipe.css"> 
+<link rel="stylesheet" href="./default-skin/default-skin.css"> 
 
-        
+<div class="photos-btn-wrap">
+    <a class="photos-btn active" href="javascript:void(0)">照片美如画</a>
+</div>
+<div class="instagram itemscope">
+    <a href="http://localhost:4000/mrxun" target="_blank" class="open-ins">图片正在加载中…</a>
+</div>
 
+<script>
+  (function() {
+    var loadScript = function(path) {
+      var $script = document.createElement('script')
+      document.getElementsByTagName('body')[0].appendChild($script)
+      $script.setAttribute('src', path)
+    }
+    setTimeout(function() {
+        loadScript('./ins.js')
+    }, 0)
+  })()
+</script>
 
-        
-    <div class="post-nav">
-      <div class="post-nav-item"></div>
-      <div class="post-nav-item">
-    <a href="/mrxun/2020/04/25/startHexo/" rel="next" title="开始搭建你自己的hexo">
-      开始搭建你自己的hexo <i class="fa fa-chevron-right"></i>
-    </a></div>
+      </div>
+      
+      
+      
     </div>
-      </footer>
     
-  </article>
-  
-  
-  
 
+    
+    
+    
 
 
           </div>
           
-    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -375,7 +352,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/mrxun/archives">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -385,7 +362,7 @@
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/mrxun/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -437,13 +414,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">0k</span>
+    <span title="Symbols count total">2k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">1 mins.</span>
+    <span title="Reading time total">2 mins.</span>
 </div>
 
         
@@ -463,6 +440,8 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/mrxun/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/mrxun/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/mrxun/lib/velocity/velocity.min.js"></script>
   <script src="/mrxun/lib/velocity/velocity.ui.min.js"></script>
 
