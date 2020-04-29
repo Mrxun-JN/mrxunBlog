@@ -3,11 +3,11 @@
   <title>MrXunのBlog</title>
   
   <subtitle>欢迎光临</subtitle>
-  <link href="/mrxun/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
-  <link href="http://mrxun_jn.gitee.io/mrxun/"/>
+  <link href="http://mrxun.in/"/>
   <updated>2020-04-29T02:04:19.021Z</updated>
-  <id>http://mrxun_jn.gitee.io/mrxun/</id>
+  <id>http://mrxun.in/</id>
   
   <author>
     <name>Mr.Xun</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>感谢相识，不计消失</title>
-    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/29/hello-world/"/>
-    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/29/hello-world/</id>
+    <link href="http://mrxun.in/2020/04/29/hello-world/"/>
+    <id>http://mrxun.in/2020/04/29/hello-world/</id>
     <published>2020-04-29T02:04:19.045Z</published>
     <updated>2020-04-29T02:04:19.021Z</updated>
     
@@ -33,14 +33,14 @@
     
     
     
-      <category term="胡言乱语" scheme="http://mrxun_jn.gitee.io/mrxun/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/"/>
+      <category term="胡言乱语" scheme="http://mrxun.in/tags/%E8%83%A1%E8%A8%80%E4%B9%B1%E8%AF%AD/"/>
     
   </entry>
   
   <entry>
     <title>优雅的在 deepin 中使用 SSR</title>
-    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/29/use_ssr_in_linux/"/>
-    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/29/use_ssr_in_linux/</id>
+    <link href="http://mrxun.in/2020/04/29/use_ssr_in_linux/"/>
+    <id>http://mrxun.in/2020/04/29/use_ssr_in_linux/</id>
     <published>2020-04-29T02:00:00.000Z</published>
     <updated>2020-04-29T02:04:50.057Z</updated>
     
@@ -54,18 +54,18 @@
     
     
     
-      <category term="技术饭" scheme="http://mrxun_jn.gitee.io/mrxun/tags/%E6%8A%80%E6%9C%AF%E9%A5%AD/"/>
+      <category term="技术饭" scheme="http://mrxun.in/tags/%E6%8A%80%E6%9C%AF%E9%A5%AD/"/>
     
-      <category term="ssr" scheme="http://mrxun_jn.gitee.io/mrxun/tags/ssr/"/>
+      <category term="ssr" scheme="http://mrxun.in/tags/ssr/"/>
     
-      <category term="酸酸乳" scheme="http://mrxun_jn.gitee.io/mrxun/tags/%E9%85%B8%E9%85%B8%E4%B9%B3/"/>
+      <category term="酸酸乳" scheme="http://mrxun.in/tags/%E9%85%B8%E9%85%B8%E4%B9%B3/"/>
     
   </entry>
   
   <entry>
     <title>开始搭建你自己的hexo</title>
-    <link href="http://mrxun_jn.gitee.io/mrxun/2020/04/25/startHexo/"/>
-    <id>http://mrxun_jn.gitee.io/mrxun/2020/04/25/startHexo/</id>
+    <link href="http://mrxun.in/2020/04/25/startHexo/"/>
+    <id>http://mrxun.in/2020/04/25/startHexo/</id>
     <published>2020-04-25T13:56:08.653Z</published>
     <updated>2020-04-25T13:56:08.617Z</updated>
     
@@ -78,12 +78,12 @@
     </summary>
     
     
-      <category term="技术博客" scheme="http://mrxun_jn.gitee.io/mrxun/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/"/>
+      <category term="技术博客" scheme="http://mrxun.in/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/"/>
     
     
-      <category term="技术饭" scheme="http://mrxun_jn.gitee.io/mrxun/tags/%E6%8A%80%E6%9C%AF%E9%A5%AD/"/>
+      <category term="技术饭" scheme="http://mrxun.in/tags/%E6%8A%80%E6%9C%AF%E9%A5%AD/"/>
     
-      <category term="hexo" scheme="http://mrxun_jn.gitee.io/mrxun/tags/hexo/"/>
+      <category term="hexo" scheme="http://mrxun.in/tags/hexo/"/>
     
   </entry>
   
