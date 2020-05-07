@@ -14,6 +14,34 @@
       </tags>
   </entry>
   <entry>
+    <title>开始搭建你自己的hexo</title>
+    <url>/2020/04/25/startHexo/</url>
+    <content><![CDATA[<p>一些简单的hexo命令</p>
+<a id="more"></a>
+
+<h2 id="学习搭建自己的hexo博客"><a href="#学习搭建自己的hexo博客" class="headerlink" title="学习搭建自己的hexo博客"></a>学习搭建自己的hexo博客</h2><h3 id="上传文章"><a href="#上传文章" class="headerlink" title="上传文章"></a>上传文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="启动hexo服务"><a href="#启动hexo服务" class="headerlink" title="启动hexo服务"></a>启动hexo服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="更新静态页面"><a href="#更新静态页面" class="headerlink" title="更新静态页面"></a>更新静态页面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传到码云"><a href="#上传到码云" class="headerlink" title="上传到码云"></a>上传到码云</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>技术博客</category>
+      </categories>
+      <tags>
+        <tag>技术饭</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>优雅的在 deepin 中使用 SSR</title>
     <url>/2020/04/29/use_ssr_in_linux/</url>
     <content><![CDATA[<p>在 Linux 中使用 SSR,  相较于 Windows 真是太麻烦了<br>不过有我教你，莫要害怕</p>
@@ -51,34 +79,6 @@
         <tag>技术饭</tag>
         <tag>ssr</tag>
         <tag>酸酸乳</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开始搭建你自己的hexo</title>
-    <url>/2020/04/25/startHexo/</url>
-    <content><![CDATA[<p>一些简单的hexo命令</p>
-<a id="more"></a>
-
-<h2 id="学习搭建自己的hexo博客"><a href="#学习搭建自己的hexo博客" class="headerlink" title="学习搭建自己的hexo博客"></a>学习搭建自己的hexo博客</h2><h3 id="上传文章"><a href="#上传文章" class="headerlink" title="上传文章"></a>上传文章</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="启动hexo服务"><a href="#启动hexo服务" class="headerlink" title="启动hexo服务"></a>启动hexo服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="更新静态页面"><a href="#更新静态页面" class="headerlink" title="更新静态页面"></a>更新静态页面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<h3 id="上传到码云"><a href="#上传到码云" class="headerlink" title="上传到码云"></a>上传到码云</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>技术博客</category>
-      </categories>
-      <tags>
-        <tag>技术饭</tag>
-        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
