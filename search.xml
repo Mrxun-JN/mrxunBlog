@@ -69,10 +69,23 @@
 </ol>
 ]]></content>
       <tags>
+        <tag>hexo</tag>
         <tag>Next</tag>
         <tag>博客美化</tag>
         <tag>python</tag>
-        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>感谢相识，不计消失</title>
+    <url>/2020/04/29/hello-world/</url>
+    <content><![CDATA[<p>感谢你曾经来过，可是我只是个过客</p>
+<a id="more"></a>
+
+<p>点开这篇文章的你应该更有兴趣点开 “关于”</p>
+<p>你我的故事或许从这里开始</p>
+]]></content>
+      <tags>
+        <tag>胡言乱语</tag>
       </tags>
   </entry>
   <entry>
@@ -110,22 +123,9 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">proxychains wget www.google.com</span><br></pre></td></tr></table></figure>
 ]]></content>
       <tags>
+        <tag>技术饭</tag>
         <tag>ssr</tag>
         <tag>酸酸乳</tag>
-        <tag>技术饭</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>感谢相识，不计消失</title>
-    <url>/2020/04/29/hello-world/</url>
-    <content><![CDATA[<p>感谢你曾经来过，可是我只是个过客</p>
-<a id="more"></a>
-
-<p>点开这篇文章的你应该更有兴趣点开 “关于”</p>
-<p>你我的故事或许从这里开始</p>
-]]></content>
-      <tags>
-        <tag>胡言乱语</tag>
       </tags>
   </entry>
   <entry>
@@ -152,8 +152,8 @@
         <category>技术博客</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
         <tag>技术饭</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
