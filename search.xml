@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>为 Next 主题添加相册功能</title>
-    <url>/2020/05/09/how_create_photos_page/</url>
+    <url>/how_create_photos_page.html</url>
     <content><![CDATA[<p>在博客中记录你的回忆，过程是如此的艰难 QAQ</p>
 <a id="more"></a>
 <h2 id="前提准备"><a href="#前提准备" class="headerlink" title="前提准备"></a>前提准备</h2><ol>
@@ -80,7 +80,7 @@
   </entry>
   <entry>
     <title>感谢相识，不计消失</title>
-    <url>/2020/04/29/hello-world/</url>
+    <url>/hello-world.html</url>
     <content><![CDATA[<p>感谢你曾经来过，可是我只是个过客</p>
 <a id="more"></a>
 
@@ -93,7 +93,7 @@
   </entry>
   <entry>
     <title>优雅的在 deepin 中使用 SSR</title>
-    <url>/2020/04/29/use_ssr_in_linux/</url>
+    <url>/use_ssr_in_linux.html</url>
     <content><![CDATA[<p>在 Linux 中使用 SSR,  相较于 Windows 真是太麻烦了<br>不过有我教你，莫要害怕</p>
 <a id="more"></a>
 <h2 id="首先你需要一个机场"><a href="#首先你需要一个机场" class="headerlink" title="首先你需要一个机场"></a>首先你需要一个机场</h2><p>** 如果你需要一个专属于自己的机场，稍后我会发布一篇单独的文章手把手教你 **</p>
@@ -133,7 +133,7 @@
   </entry>
   <entry>
     <title>开始搭建你自己的hexo</title>
-    <url>/2020/04/25/startHexo/</url>
+    <url>/startHexo.html</url>
     <content><![CDATA[<p>一些简单的hexo命令</p>
 <a id="more"></a>
 
