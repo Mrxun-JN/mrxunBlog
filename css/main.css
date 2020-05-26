@@ -1213,7 +1213,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4079ac;
+  background: #325b59;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1539,6 +1539,7 @@ pre .javascript .function {
   opacity: 0.8;
 }
 .post-body {
+  color: #333;
   font-family: 'Noto Serif SC', "Noto Serif SC", sans-serif;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -1562,10 +1563,12 @@ pre .javascript .function {
   text-align: center;
 }
 .post-sticky-flag {
+  color: #333;
   display: inline-block;
   transform: rotate(30deg);
 }
 .post-button {
+  color: #333;
   margin-top: 40px;
   text-align: center;
 }
