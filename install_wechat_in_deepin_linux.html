@@ -21,20 +21,23 @@
     var CONFIG = {"hostname":"www.mrxun.in","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"expandIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一些简单的hexo命令">
+  <meta name="description" content="在使用了 1 年的deepin-wechat 后实在是受不了长达 1 年半的不更新，不支持小程序我都忍了，你竟然不支持抢红包！ 绝对不能忍，虽然通过 wine 安装之后还是有一些 bug ，但是用上新版之后瞬间感觉自己从原始人变成的现代人 文章参考了网上一些方法，不过大多数都是旧教程，下面的方法绝对可行，直接开讲！  文章首发在 CSDN 上，欢迎关注">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开始搭建你自己的hexo">
-<meta property="og:url" content="https://www.mrxun.in/startHexo.html">
+<meta property="og:title" content="如何在 Deppin Linux 中使用 wine 安装新版微信">
+<meta property="og:url" content="https://www.mrxun.in/install_wechat_in_deepin_linux.html">
 <meta property="og:site_name" content="MrXunのBlog">
-<meta property="og:description" content="一些简单的hexo命令">
-<meta property="article:published_time" content="2020-04-25T13:56:08.653Z">
-<meta property="article:modified_time" content="2020-04-25T13:56:08.617Z">
+<meta property="og:description" content="在使用了 1 年的deepin-wechat 后实在是受不了长达 1 年半的不更新，不支持小程序我都忍了，你竟然不支持抢红包！ 绝对不能忍，虽然通过 wine 安装之后还是有一些 bug ，但是用上新版之后瞬间感觉自己从原始人变成的现代人 文章参考了网上一些方法，不过大多数都是旧教程，下面的方法绝对可行，直接开讲！  文章首发在 CSDN 上，欢迎关注">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201021104629595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyMTE1OTM5,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="article:published_time" content="2020-10-21T03:03:15.000Z">
+<meta property="article:modified_time" content="2020-10-21T03:17:10.589Z">
 <meta property="article:author" content="Mr.Xun">
+<meta property="article:tag" content="softwares">
+<meta property="article:tag" content="Linux">
 <meta property="article:tag" content="技术饭">
-<meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201021104629595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyMTE1OTM5,size_16,color_FFFFFF,t_70#pic_center">
 
-<link rel="canonical" href="https://www.mrxun.in/startHexo.html">
+<link rel="canonical" href="https://www.mrxun.in/install_wechat_in_deepin_linux.html">
 
 
 <script id="page-configurations">
@@ -47,7 +50,7 @@
   };
 </script>
 
-  <title>开始搭建你自己的hexo | MrXunのBlog</title>
+  <title>如何在 Deppin Linux 中使用 wine 安装新版微信 | MrXunのBlog</title>
   <meta name="baidu-site-verification" content="1EgGi05vUS" />
   <meta name="google-site-verification" content="zhsGvkp16Fb3BzE1e2NzW6Q8OctoO38PxxH4ACFPUMM" />
   
@@ -171,7 +174,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://www.mrxun.in/startHexo.html">
+    <link itemprop="mainEntityOfPage" href="https://www.mrxun.in/install_wechat_in_deepin_linux.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/mrxun.jpg">
@@ -184,7 +187,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          开始搭建你自己的hexo
+          如何在 Deppin Linux 中使用 wine 安装新版微信
         </h1>
 
         <div class="post-meta">
@@ -193,21 +196,13 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-04-25 21:56:08" itemprop="dateCreated datePublished" datetime="2020-04-25T21:56:08+08:00">2020-04-25</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">技术博客</span></a>
-                </span>
+              <time title="Created: 2020-10-21 11:03:15 / Modified: 11:17:10" itemprop="dateCreated datePublished" datetime="2020-10-21T11:03:15+08:00">2020-10-21</time>
             </span>
 
           
-            <span id="/startHexo.html" class="post-meta-item leancloud_visitors" data-flag-title="开始搭建你自己的hexo" title="Views">
+            <span id="/install_wechat_in_deepin_linux.html" class="post-meta-item leancloud_visitors" data-flag-title="如何在 Deppin Linux 中使用 wine 安装新版微信" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -222,8 +217,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/startHexo.html#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/startHexo.html" itemprop="commentCount"></span>
+    <a title="valine" href="/install_wechat_in_deepin_linux.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/install_wechat_in_deepin_linux.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -233,14 +228,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>183</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -252,22 +247,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>一些简单的hexo命令</p>
+        <p>在使用了 1 年的deepin-wechat 后实在是受不了长达 1 年半的不更新，不支持小程序我都忍了，你竟然不支持抢红包！</p>
+<p>绝对不能忍，虽然通过 wine 安装之后还是有一些 bug ，但是用上新版之后瞬间感觉自己从原始人变成的现代人</p>
+<p>文章参考了网上一些方法，不过大多数都是旧教程，下面的方法绝对可行，直接开讲！</p>
+<blockquote>
+<p>文章首发在 <a href="https://blog.csdn.net/qq_32115939" target="_blank" rel="noopener">CSDN</a> 上，欢迎关注</p>
+</blockquote>
 <a id="more"></a>
 
-<h2 id="学习搭建自己的hexo博客"><a href="#学习搭建自己的hexo博客" class="headerlink" title="学习搭建自己的hexo博客"></a>学习搭建自己的hexo博客</h2><h3 id="上传文章"><a href="#上传文章" class="headerlink" title="上传文章"></a>上传文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装-Wine-5-0"><a href="#安装-Wine-5-0" class="headerlink" title="安装 Wine 5.0"></a>安装 Wine 5.0</h2><p>先卸载旧版的 Wine<br>如果当前的系统中已经安装有 wine, 但版本不是 5.0, 可以考虑先卸载再安装（否则可能提示无法安装 5.0 版本）。<br>卸载方式如下 :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get --purge remove wine wine32 wine64</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="启动hexo服务"><a href="#启动hexo服务" class="headerlink" title="启动hexo服务"></a>启动hexo服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="更新静态页面"><a href="#更新静态页面" class="headerlink" title="更新静态页面"></a>更新静态页面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h2 id="安装-5-0-版-wine"><a href="#安装-5-0-版-wine" class="headerlink" title="安装 5.0 版 wine"></a>安装 5.0 版 wine</h2><p>根据系统版本选择相应的配置下载，基本流程一致:</p>
+<h3 id="添加仓库"><a href="#添加仓库" class="headerlink" title="添加仓库"></a>添加仓库</h3><p>在 /etc/apt/sources.list 文件下添加仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/apt/sources.list </span><br><span class="line"><span class="comment"># 在这个文件下添加以下代码，通常在文件内容的最后行增加上：</span></span><br><span class="line"></span><br><span class="line">	deb https://dl.winehq.org/wine-builds/debian/ stretch main</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  如果你使用的是 Debian Jessie 系统，就把 stretch 改成 jessie 即可，即更改其代号。</p>
+</blockquote>
+<h3 id="下载并安装存储库密钥"><a href="#下载并安装存储库密钥" class="headerlink" title="下载并安装存储库密钥"></a>下载并安装存储库密钥</h3><p>运行以下两段命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ wget -nc https://dl.winehq.org/wine-builds/winehq.key</span><br><span class="line"></span><br><span class="line">$ sudo apt-key add winehq.key</span><br></pre></td></tr></table></figure>
+<h4 id="更新仓库"><a href="#更新仓库" class="headerlink" title="更新仓库"></a>更新仓库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt update</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="安装稳定版本-Wine-5-0"><a href="#安装稳定版本-Wine-5-0" class="headerlink" title="安装稳定版本 Wine 5.0"></a>安装稳定版本 Wine 5.0</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install --install-recommends winehq-stable</span><br></pre></td></tr></table></figure>
 
-<h3 id="上传到码云"><a href="#上传到码云" class="headerlink" title="上传到码云"></a>上传到码云</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>查看一下版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wine --version</span><br></pre></td></tr></table></figure>
+
+<p><strong>wine-5.0.2</strong> </p>
+<h3 id="安装最新版的-winetricks"><a href="#安装最新版的-winetricks" class="headerlink" title="安装最新版的 winetricks"></a>安装最新版的 winetricks</h3><p>微信的正常使用需要配置相应的依赖文件，而依赖是通过 winetricks 安装的，但是通过 apt-get install 按照的 winetricks 版本比较老，提供的依赖可能有问题，因此最好是安装最新的版本 。</p>
+<p>卸载已安装的旧版</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remove winetricks</span><br></pre></td></tr></table></figure>
+
+<p>获取新版</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget  https://cdn.jsdelivr.net/gh/Winetricks/winetricks@master/src/winetricks</span><br></pre></td></tr></table></figure>
+
+<p>修改权限为可执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chmod +x winetricks</span><br></pre></td></tr></table></figure>
+
+<p>将可执行文件放置于 terminal 可调用的目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv -v winetricks /usr/<span class="built_in">local</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>下面的步骤是重中之重</strong></p>
+<h3 id="安装微信"><a href="#安装微信" class="headerlink" title="安装微信"></a>安装微信</h3><p><strong>友情提示：安装完成后托盘中的微信图标无法正常使用，暂时没找到可以解决的办法</strong></p>
+<h4 id="创建-wine-环境"><a href="#创建-wine-环境" class="headerlink" title="创建 wine 环境"></a>创建 wine 环境</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir wechat-wine</span><br><span class="line">$ <span class="built_in">cd</span> wechat-wine</span><br><span class="line">$ WINARCH=win32 WINEPREFIX=<span class="variable">$PWD</span> winecfg</span><br></pre></td></tr></table></figure>
+
+<p>注意其中的几个关键点: WINARCH=win32 是将架构配置为 32 位以便提供更好的兼容性，WINEPREFIX 设置了相应 bottle 所在的目录，我命名为 WeChat, 最后是 winecfg 即启动 wine 的初始化设置。执行后会提示若干的 err 或 fixme, 不用管，直至弹出 winecfg 的界面，4.0 版本下默认是 windows 7 的配置，保留默认设置即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ WINARCH=win32 WINEPREFIX=<span class="variable">$PWD</span> winetricks</span><br></pre></td></tr></table></figure>
+<p>这里会提示你安装 wine-nano 点确定之后等他自动安装即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">选择默认的Wine容器 -&gt; OK </span><br><span class="line"></span><br><span class="line">-&gt; 安装Windows DLL组件 -&gt; OK </span><br><span class="line"></span><br><span class="line">-&gt; 勾选riched20.dll 和 riched32.dll  -&gt; OK </span><br><span class="line"></span><br><span class="line">-&gt; 等待安装 -&gt; 安装完成点取消即可</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="正式安装"><a href="#正式安装" class="headerlink" title="正式安装"></a>正式安装</h4><p>在微信官网下载微信 PC 版安装包即可，下载后将安装包置于 wechat-wine/  下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ WINARCH=win32 WINEPREFIX=<span class="variable">$PWD</span> wine ./WeChatSetup.exe</span><br></pre></td></tr></table></figure>
+<p>仍然与上述命令类似，将 winecfg 改为 wine, 然后接安装包的名称，等待安装完毕即可，后面安装步骤与 windows 上安装没有区别</p>
+<p>安装完成后可以在启动菜单里看到微信的图标<img src="https://img-blog.csdnimg.cn/20201021104629595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyMTE1OTM5,size_16,color_FFFFFF,t_70#pic_center" alt="安装成功后出现的图标"></p>
+<h3 id="托盘图标问题"><a href="#托盘图标问题" class="headerlink" title="托盘图标问题"></a>托盘图标问题</h3><p>deepin 论坛中有几个方法，但是我试了之后都没什么用，大家可以评论区讨论一下</p>
+<blockquote>
+<p>转载请注明出处</p>
+</blockquote>
 
     </div>
 
@@ -283,7 +321,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link: </strong>
-    <a href="https://www.mrxun.in/startHexo.html" title="开始搭建你自己的hexo">https://www.mrxun.in/startHexo.html</a>
+    <a href="https://www.mrxun.in/install_wechat_in_deepin_linux.html" title="如何在 Deppin Linux 中使用 wine 安装新版微信">https://www.mrxun.in/install_wechat_in_deepin_linux.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
@@ -294,8 +332,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/softwares/" rel="tag"># softwares</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
               <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A5%AD/" rel="tag"># 技术饭</a>
-              <a href="/tags/hexo/" rel="tag"># hexo</a>
           </div>
 
         
@@ -303,11 +342,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/use_ssr_in_linux.html" rel="next" title="优雅的在 deepin 中使用 SSR">
-      优雅的在 deepin 中使用 SSR <i class="fa fa-chevron-right"></i>
+    <a href="/how_create_photos_page.html" rel="prev" title="为 Next 主题添加相册功能">
+      <i class="fa fa-chevron-left"></i> 为 Next 主题添加相册功能
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -367,7 +406,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习搭建自己的hexo博客"><span class="nav-number">1.</span> <span class="nav-text">学习搭建自己的hexo博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上传文章"><span class="nav-number">1.1.</span> <span class="nav-text">上传文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动hexo服务"><span class="nav-number">1.2.</span> <span class="nav-text">启动hexo服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新静态页面"><span class="nav-number">1.3.</span> <span class="nav-text">更新静态页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">1.4.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传到码云"><span class="nav-number">1.5.</span> <span class="nav-text">上传到码云</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Wine-5-0"><span class="nav-number">1.</span> <span class="nav-text">安装 Wine 5.0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-5-0-版-wine"><span class="nav-number">2.</span> <span class="nav-text">安装 5.0 版 wine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加仓库"><span class="nav-number">2.1.</span> <span class="nav-text">添加仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并安装存储库密钥"><span class="nav-number">2.2.</span> <span class="nav-text">下载并安装存储库密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#更新仓库"><span class="nav-number">2.2.1.</span> <span class="nav-text">更新仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装稳定版本-Wine-5-0"><span class="nav-number">2.3.</span> <span class="nav-text">安装稳定版本 Wine 5.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装最新版的-winetricks"><span class="nav-number">2.4.</span> <span class="nav-text">安装最新版的 winetricks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装微信"><span class="nav-number">2.5.</span> <span class="nav-text">安装微信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-wine-环境"><span class="nav-number">2.5.1.</span> <span class="nav-text">创建 wine 环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正式安装"><span class="nav-number">2.5.2.</span> <span class="nav-text">正式安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#托盘图标问题"><span class="nav-number">2.6.</span> <span class="nav-text">托盘图标问题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

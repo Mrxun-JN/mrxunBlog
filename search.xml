@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>如何在 Deppin Linux 中使用 wine 安装新版微信</title>
+    <url>/install_wechat_in_deepin_linux.html</url>
+    <content><![CDATA[<p>在使用了 1 年的deepin-wechat 后实在是受不了长达 1 年半的不更新，不支持小程序我都忍了，你竟然不支持抢红包！</p>
+<p>绝对不能忍，虽然通过 wine 安装之后还是有一些 bug ，但是用上新版之后瞬间感觉自己从原始人变成的现代人</p>
+<p>文章参考了网上一些方法，不过大多数都是旧教程，下面的方法绝对可行，直接开讲！</p>
+<blockquote>
+<p>文章首发在 <a href="https://blog.csdn.net/qq_32115939" target="_blank" rel="noopener">CSDN</a> 上，欢迎关注</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="安装-Wine-5-0"><a href="#安装-Wine-5-0" class="headerlink" title="安装 Wine 5.0"></a>安装 Wine 5.0</h2><p>先卸载旧版的 Wine<br>如果当前的系统中已经安装有 wine, 但版本不是 5.0, 可以考虑先卸载再安装（否则可能提示无法安装 5.0 版本）。<br>卸载方式如下 :</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get --purge remove wine wine32 wine64</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="安装-5-0-版-wine"><a href="#安装-5-0-版-wine" class="headerlink" title="安装 5.0 版 wine"></a>安装 5.0 版 wine</h2><p>根据系统版本选择相应的配置下载，基本流程一致:</p>
+<h3 id="添加仓库"><a href="#添加仓库" class="headerlink" title="添加仓库"></a>添加仓库</h3><p>在 /etc/apt/sources.list 文件下添加仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo vim /etc/apt/sources.list </span><br><span class="line"><span class="comment"># 在这个文件下添加以下代码，通常在文件内容的最后行增加上：</span></span><br><span class="line"></span><br><span class="line">	deb https://dl.winehq.org/wine-builds/debian/ stretch main</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  如果你使用的是 Debian Jessie 系统，就把 stretch 改成 jessie 即可，即更改其代号。</p>
+</blockquote>
+<h3 id="下载并安装存储库密钥"><a href="#下载并安装存储库密钥" class="headerlink" title="下载并安装存储库密钥"></a>下载并安装存储库密钥</h3><p>运行以下两段命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget -nc https://dl.winehq.org/wine-builds/winehq.key</span><br><span class="line"></span><br><span class="line">$ sudo apt-key add winehq.key</span><br></pre></td></tr></table></figure>
+<h4 id="更新仓库"><a href="#更新仓库" class="headerlink" title="更新仓库"></a>更新仓库</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt update</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装稳定版本-Wine-5-0"><a href="#安装稳定版本-Wine-5-0" class="headerlink" title="安装稳定版本 Wine 5.0"></a>安装稳定版本 Wine 5.0</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt install --install-recommends winehq-stable</span><br></pre></td></tr></table></figure>
+
+<p>查看一下版本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wine --version</span><br></pre></td></tr></table></figure>
+
+<p><strong>wine-5.0.2</strong> </p>
+<h3 id="安装最新版的-winetricks"><a href="#安装最新版的-winetricks" class="headerlink" title="安装最新版的 winetricks"></a>安装最新版的 winetricks</h3><p>微信的正常使用需要配置相应的依赖文件，而依赖是通过 winetricks 安装的，但是通过 apt-get install 按照的 winetricks 版本比较老，提供的依赖可能有问题，因此最好是安装最新的版本 。</p>
+<p>卸载已安装的旧版</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get remove winetricks</span><br></pre></td></tr></table></figure>
+
+<p>获取新版</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget  https://cdn.jsdelivr.net/gh/Winetricks/winetricks@master/src/winetricks</span><br></pre></td></tr></table></figure>
+
+<p>修改权限为可执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ chmod +x winetricks</span><br></pre></td></tr></table></figure>
+
+<p>将可执行文件放置于 terminal 可调用的目录下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo mv -v winetricks /usr/<span class="built_in">local</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>下面的步骤是重中之重</strong></p>
+<h3 id="安装微信"><a href="#安装微信" class="headerlink" title="安装微信"></a>安装微信</h3><p><strong>友情提示：安装完成后托盘中的微信图标无法正常使用，暂时没找到可以解决的办法</strong></p>
+<h4 id="创建-wine-环境"><a href="#创建-wine-环境" class="headerlink" title="创建 wine 环境"></a>创建 wine 环境</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mkdir wechat-wine</span><br><span class="line">$ <span class="built_in">cd</span> wechat-wine</span><br><span class="line">$ WINARCH=win32 WINEPREFIX=<span class="variable">$PWD</span> winecfg</span><br></pre></td></tr></table></figure>
+
+<p>注意其中的几个关键点: WINARCH=win32 是将架构配置为 32 位以便提供更好的兼容性，WINEPREFIX 设置了相应 bottle 所在的目录，我命名为 WeChat, 最后是 winecfg 即启动 wine 的初始化设置。执行后会提示若干的 err 或 fixme, 不用管，直至弹出 winecfg 的界面，4.0 版本下默认是 windows 7 的配置，保留默认设置即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ WINARCH=win32 WINEPREFIX=<span class="variable">$PWD</span> winetricks</span><br></pre></td></tr></table></figure>
+<p>这里会提示你安装 wine-nano 点确定之后等他自动安装即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">选择默认的Wine容器 -&gt; OK </span><br><span class="line"></span><br><span class="line">-&gt; 安装Windows DLL组件 -&gt; OK </span><br><span class="line"></span><br><span class="line">-&gt; 勾选riched20.dll 和 riched32.dll  -&gt; OK </span><br><span class="line"></span><br><span class="line">-&gt; 等待安装 -&gt; 安装完成点取消即可</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="正式安装"><a href="#正式安装" class="headerlink" title="正式安装"></a>正式安装</h4><p>在微信官网下载微信 PC 版安装包即可，下载后将安装包置于 wechat-wine/  下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ WINARCH=win32 WINEPREFIX=<span class="variable">$PWD</span> wine ./WeChatSetup.exe</span><br></pre></td></tr></table></figure>
+<p>仍然与上述命令类似，将 winecfg 改为 wine, 然后接安装包的名称，等待安装完毕即可，后面安装步骤与 windows 上安装没有区别</p>
+<p>安装完成后可以在启动菜单里看到微信的图标<img src="https://img-blog.csdnimg.cn/20201021104629595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyMTE1OTM5,size_16,color_FFFFFF,t_70#pic_center" alt="安装成功后出现的图标"></p>
+<h3 id="托盘图标问题"><a href="#托盘图标问题" class="headerlink" title="托盘图标问题"></a>托盘图标问题</h3><p>deepin 论坛中有几个方法，但是我试了之后都没什么用，大家可以评论区讨论一下</p>
+<blockquote>
+<p>转载请注明出处</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>softwares</tag>
+        <tag>Linux</tag>
+        <tag>技术饭</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为 Next 主题添加相册功能</title>
     <url>/how_create_photos_page.html</url>
     <content><![CDATA[<p>在博客中记录你的回忆，过程是如此的艰难 QAQ</p>
