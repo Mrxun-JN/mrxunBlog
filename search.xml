@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>how_to_install_docker_in_wsl</title>
+    <title>在 Windows 中为 WSL 安装 Docker 并使用阿里云容器镜像服务</title>
     <url>/how-to-install-docker-in-wsl.html</url>
     <content><![CDATA[<p>最近准备入手一套 NAS ，于是乎决定先研究一下大名鼎鼎的 Docker 容器</p>
 <a id="more"></a>
