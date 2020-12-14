@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mrxun.in","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"expandIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在 smzdm 的社区中跟着阿文菌大佬学习了很多 nas 的知识，最近自己也在咸鱼上收了个二手 itx 主机做nas，配置就是普通的 i3 8100 （被大佬疯狂安利），8G 内存 下面的内容主要是介绍旁路由的一些设置，网上查了很久的资料都不全面，无奈只能自己总结学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unraid 折腾日记以及虚拟旁路由教程">
+<meta property="og:url" content="https://www.mrxun.in/unraid-and-openwrt.html">
+<meta property="og:site_name" content="MrXunのBlog">
+<meta property="og:description" content="在 smzdm 的社区中跟着阿文菌大佬学习了很多 nas 的知识，最近自己也在咸鱼上收了个二手 itx 主机做nas，配置就是普通的 i3 8100 （被大佬疯狂安利），8G 内存 下面的内容主要是介绍旁路由的一些设置，网上查了很久的资料都不全面，无奈只能自己总结学习">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-12-14T08:08:03.000Z">
+<meta property="article:modified_time" content="2020-12-14T08:10:13.980Z">
+<meta property="article:author" content="Mr.Xun">
+<meta property="article:tag" content="技术饭">
+<meta property="article:tag" content="unraid">
+<meta property="article:tag" content="NAS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.mrxun.in/unraid-and-openwrt.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>unraid 折腾日记以及虚拟旁路由教程 | MrXunのBlog</title>
+  <meta name="baidu-site-verification" content="1EgGi05vUS" />
+  <meta name="google-site-verification" content="zhsGvkp16Fb3BzE1e2NzW6Q8OctoO38PxxH4ACFPUMM" />
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script type="text/javascript" src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
+  <script src="/js/src/photoswipe.min.js"></script>
+  <script src="/js/src/photoswipe-ui-default.js"></script>
+<link rel="alternate" href="/atom.xml" title="MrXunのBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MrXunのBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎光临</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-所有文章">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有文章</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/photos/" rel="section"><i class="fa fa-paw fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.mrxun.in/unraid-and-openwrt.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mrxun.jpg">
+      <meta itemprop="name" content="Mr.Xun">
+      <meta itemprop="description" content="<br/>风住尘香花已尽<br/>日晚倦梳头<br/>物是人非事事休<br/>欲语泪先流<br/>闻说双溪春尚好<br/>也拟泛轻舟<br/>只恐双溪舴艋舟<br/>载不动许多愁<br/>">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MrXunのBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          unraid 折腾日记以及虚拟旁路由教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-12-14 16:08:03 / Modified: 16:10:13" itemprop="dateCreated datePublished" datetime="2020-12-14T16:08:03+08:00">2020-12-14</time>
+            </span>
+
+          
+            <span id="/unraid-and-openwrt.html" class="post-meta-item leancloud_visitors" data-flag-title="unraid 折腾日记以及虚拟旁路由教程" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/unraid-and-openwrt.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/unraid-and-openwrt.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在 smzdm 的社区中跟着阿文菌大佬学习了很多 nas 的知识，最近自己也在咸鱼上收了个二手 itx 主机做nas，配置就是普通的 i3 8100 （被大佬疯狂安利），8G 内存</p>
+<p>下面的内容主要是介绍旁路由的一些设置，网上查了很久的资料都不全面，无奈只能自己总结学习</p>
+<a id="more"></a>
+
+<p>最看好的就是这个机箱，正常能放四块硬盘，如果把电源再换成小电源的话还能再放进去一个硬盘架，应该还能再多装两块硬盘</p>
+<p>现在刚装了两块东芝的 P300 ，一块数据盘，另一块做检验盘，不太好的一点是这个盘的声音确实是有点太大了，以后可能会选择更静音的盘。不过等我全部设置好了之后可能会放在弱电箱那边，应该就听不见了 hhh</p>
+<h3 id="unraid-基础安装和简单设置"><a href="#unraid-基础安装和简单设置" class="headerlink" title="unraid 基础安装和简单设置"></a>unraid 基础安装和简单设置</h3><p>安装系统确实是没什么难度，准备一个 U 盘，上网下载镜像文件再写入即可</p>
+<p>不过如果你用开心版的话，建议使用 6.8.2 ，其他版本的话我在 win10 里是没有写入成功的。看了一些教程都是建议在 win7 下进行系统的写入，如果手头有 win7 的话可以尝试然后分享一下~</p>
+<p>设置方面也是比较直接，使用起来比较方便，唯一的困难是界面都是英文 … 我也懒的去装中文补丁，直接使用 Google 翻译也是可以的</p>
+<p>网页的设置我就不多说了，跟着大佬的基础教程文章即可，还有很多设置是需要打开命令行进行操作，需要一定的 Linux 基础，不过很多教程把所有的命令都一步一步写出来，直接照着做就可以了</p>
+<h3 id="安装-openwrt-做旁路由"><a href="#安装-openwrt-做旁路由" class="headerlink" title="安装 openwrt 做旁路由"></a>安装 openwrt 做旁路由</h3><h4 id="创建虚拟机"><a href="#创建虚拟机" class="headerlink" title="创建虚拟机"></a>创建虚拟机</h4><p>因为我这台机器的 PCIe 接口好像是有点问题，买的两块网卡都用不了，本来是想直接虚拟一台主路由出来的，只好作罢。另外我也怕系统万一出了什么故障导致家里的所有设备都上不了网，所以还是做旁路由比较合理</p>
+<p>系统我选择的是 koolshare 版本的 openwrt，直接在<a target="_blank" rel="noopener" href="https://firmware.koolshare.cn/">官网</a>下载，然后上传到 unraid 中的任意一个文件夹即可</p>
+<p>unraid 的虚拟机设置在 VMs 里面，点击添加 Linux 虚拟机</p>
+<ol>
+<li>选择你需要的配置 （CPU、内存）</li>
+<li>在把 BIOS 选择为 SeaBios</li>
+<li>选择镜像文件不是 ISO，而是把 Primary vDisk Location 修改为 manual ，然后再后面的路径里选择你刚才上传的镜像文件即可</li>
+</ol>
+<blockquote>
+<p>声明：我写文章不是很喜欢放图 … 我觉得还不如用文字把步骤一步一步写清楚来的好，看图片和视频教程我会很狂躁 … 不喜勿喷哈</p>
+</blockquote>
+<p>安装后先点击 openwrt 的头像，点击 webUI 进入终端，接着输入下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/config/network</span><br></pre></td></tr></table></figure>
+
+<p>把 192.168.1.1 修改成你家的路由器下发地址，比如你家路由器的后台地址是 192.168.0.1 ，这里你就修改为 192.168.0.199 只要不和别的设备重复即可</p>
+<p>修改完后按下 esc ，:wq 退出</p>
+<p>再输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+
+<p>给 root 创建密码，需要连续输入两次，终端里不会显示 * 号，输完回车即可</p>
+<p>然后重启虚拟机，可以在 unraid 控制，也可以直接在终端里输入 reboot</p>
+<p>等虚拟机重启完成后在浏览器输入刚才修改的地址，例如 192.168.0.199 就能打开 openwrt 的管理界面了，使用刚才创建的密码就可以进去了</p>
+<h4 id="基础设置"><a href="#基础设置" class="headerlink" title="基础设置"></a>基础设置</h4><p>这里我们还需要一下 openwrt 的网关和 DNS ，否则我们是没法上网的</p>
+<p>打开左侧 网络 &gt; 接口 ，因为我们只有一个网口，所以只用保留 lan 口。剩下的可以直接删除</p>
+<p>编辑 lan 口的网关和 DNS ，填上你家的路由器地址就可以了 ，比如 192.168.0.1 </p>
+<p>后面 DHCP 和 IPV6 功能直接禁用（如果你用不上的话）</p>
+<p>随后在右下角点击应用，这时我们使用 ssh 连接 openwrt</p>
+<p>我们直接在 Windows 里使用 powershell ，省的去下那些 ssh 连接软件，其实功能都是一样的</p>
+<p>打开 powershell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.0.199</span><br></pre></td></tr></table></figure>
+
+<p>这里输入密码时一样不会出现 * 号<br>这里 @ 后面写的是你的路由器地址，我这里仅仅是示范</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>看下是不是能够正常的下载，下载到 inden.html 文件就是成功联网了</p>
+<h3 id="给-openwrt-安装插件"><a href="#给-openwrt-安装插件" class="headerlink" title="给 openwrt 安装插件"></a>给 openwrt 安装插件</h3><p>这里我们安装 openclash （不写全了以免误删，懂的都懂），这边我建议你先在自己电脑上打开 clash 软件，打开局域网共享功能（allow lan），鼠标悬浮在这个功能上就可以看到局域网中你的 ip 地址，我们<strong>假设</strong>是 192.168.0.9</p>
+<p>然后我们打开 ssh 连接我们的 openwrt </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.0.199</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> http_proxy=http://192.168.0.9:7890</span><br><span class="line"><span class="built_in">export</span> https_proxy=https://192.168.0.9:7890</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输入完上面两条命令后在当前窗口，你的 openwrt 就可以使用你电脑的代理上网了</p>
+<p>我们继续安装过程，这里说一下 在Windows ssh 进入openwrt 时，复制是 <strong>ctrl + c</strong>，粘贴是<strong>鼠标右键</strong></p>
+<p>先安装依赖库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install luci</span><br><span class="line">opkg install luci-base</span><br><span class="line">opkg install iptables</span><br><span class="line">opkg install dnsmasq-full</span><br><span class="line">opkg install coreutils</span><br><span class="line">opkg install coreutils-nohup</span><br><span class="line">opkg install bash</span><br><span class="line">opkg install curl</span><br><span class="line">opkg install jsonfilter</span><br><span class="line">opkg install ca-certificates</span><br><span class="line">opkg install ipset</span><br><span class="line">opkg install ip-full</span><br><span class="line">opkg install iptables-mod-tproxy</span><br><span class="line">opkg install iptables-mod-extra</span><br><span class="line">opkg install libcap</span><br><span class="line">opkg install libcap-bin</span><br><span class="line">opkg install ruby</span><br><span class="line">opkg install ruby-yaml</span><br><span class="line">opkg install kmod-tun </span><br><span class="line">opkg install luci-compat</span><br><span class="line">opkg install ip6tables-mod-nat(ipv6)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>建议一条一条执行上面的命令，这样有错误也好排查，下面我总结一下我碰到的问题</p>
+<ol>
+<li>在安装 ip-full 时提示错误 libtiny1.so 文件已存在。解决方法：删除这个文件即可</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm /usr/lib64/libtiny1.so</span><br><span class="line">opkg install ip-full</span><br></pre></td></tr></table></figure>
+
+<p>这里我写的路径可以不正确，你在删除的时候直接复制路径即可</p>
+<ol start="2">
+<li>在安装 kmod-tun 时提示安装失败。解决办法：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install kmod-tun --force-depends</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install kmod-tun --nodeps</span><br></pre></td></tr></table></figure>
+
+<p>这里我是使用了第二种方法后成功安装的，不过我查的结果都是使用第一种方法，可以自行尝试</p>
+<p>安装完依赖库后我们下载 ipk 文件到 Windows 电脑中，从 <a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/releases">github</a> 下载 ，打开网页后在下面有个 Assets ，点开下载第一个 ipk 文件即可</p>
+<p>一般我们都是下载到 “下载”文件夹内，我们使用命令直接上传文件</p>
+<p>重新打开一个 powershell </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> Downloads</span><br><span class="line">scp luci-app-openc*.ipk root@192.168.0.199:/root</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在刚才 ssh 连接的窗口中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line">opkg install luci-app-openc*.ipk </span><br></pre></td></tr></table></figure>
+
+<p>这样插件就安装好了，我们打开浏览器，刷新一下 openwrt 的后台，在左侧点开服务就能看到插件已经安装完成</p>
+<h4 id="给插件安装内核"><a href="#给插件安装内核" class="headerlink" title="给插件安装内核"></a>给插件安装内核</h4><p>安装完成后我们还不能启动，因为还缺少内核文件，就像你买了遥控车需要安装电池才能启动一样</p>
+<p>我们下载两个内核 <a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/releases/tag/Clash">普通版本</a>和 <a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/releases/tag/TUN-Premium">TUN</a> 版本，这里需要注意的是一定要下载对应你 cpu 型号的内核文件，我这里是 i3 ，选择 amd64 即可。你可以现在网上查询一下再下载</p>
+<p>我们下载好后在本机先解压，普通版本解压后命名为 clash ，TUN 版本解压后命名为 clash_tun<br>解压完成后我们再上传到 openwrt 的 /etc/openclash/core/ 文件夹中，继续使用上面的命令</p>
+<p>重新打开一个 powershell </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> Downloads</span><br><span class="line">scp clash* root@192.168.0.199:/etc/openclash/core/</span><br></pre></td></tr></table></figure>
+
+<p>在 ssh 连接的窗口中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/openclash/core/</span><br><span class="line">chmod +x *</span><br></pre></td></tr></table></figure>
+
+<p>这样我们在启动 clash 的时候就不会报内核错误了</p>
+<h3 id="OpenClash-简单配置教学"><a href="#OpenClash-简单配置教学" class="headerlink" title="OpenClash 简单配置教学"></a>OpenClash 简单配置教学</h3><p>在 YouTube 上有很多视频教学，如果觉得看文字教学有困难的话可以去 YouTube 上观看</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/wiki/%E5%B8%B8%E8%A7%84%E8%AE%BE%E7%BD%AE">官方</a>也有相较本文更加专业的图文教学，可以自行选择学习</p>
+<p>这里我简单直接的说明可以直接使用的教学，如果你有更高级的需求可以自行添加即可</p>
+<h4 id="运行模式"><a href="#运行模式" class="headerlink" title="运行模式"></a>运行模式</h4><p>在我的虚拟机中只能使用  FAKE-ip 模式，原因我也不太清楚，而且在这个模式下没法进入 LOL 游戏对局，也没法登录 steam … 应该是 DNS 的设置问题，后续如果解决的话我也会第一时间分享给大家</p>
+<h4 id="添加配置文件"><a href="#添加配置文件" class="headerlink" title="添加配置文件"></a>添加配置文件</h4><p>如果你使用的机场提供订阅链接的话可以在 openclash 的 配置文件订阅 中直接添加链接，启动的时候就可以自动更新配置文件</p>
+<p>如果机场的链接没法自动更细，你也可以手动下载配置文件，然后上传到 openclash 的 配置文件顶管理中，我这里使用的机场链接没法订阅，只好手动上传</p>
+<h4 id="其他选项"><a href="#其他选项" class="headerlink" title="其他选项"></a>其他选项</h4><ol>
+<li>关闭所有的 IPV6 （如果你不需要的话）</li>
+<li>规则设置 （访问控制） 这里可以使用第三方规则，这样流量可以更加的细化。也可以屏蔽部分的广告</li>
+<li>一定要开启 UDP 转发，这才是我们能够科学上网的关键，有时候我切换到其他模式之后不能上网的主要原因就是我压根没找到 UDP 转发在哪 …</li>
+</ol>
+<p>这些都设置完成后直接点击启动就可以使用了</p>
+<p>我们打开 ssh 连接到 openwrt 测试一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@192.168.0.199</span><br><span class="line">wget www.google.com</span><br></pre></td></tr></table></figure>
+
+<p>能够正常的下载到 inden.html 文件就是成功了</p>
+<h3 id="局域网中的其他设备使用旁路由网络"><a href="#局域网中的其他设备使用旁路由网络" class="headerlink" title="局域网中的其他设备使用旁路由网络"></a>局域网中的其他设备使用旁路由网络</h3><p>以电脑为例<br>我们打开我们网路设置，手动设置 ipv4 的 ip 、DNS 和网卡</p>
+<p>假设我们 openwrt 的地址是 192.168.0.199，路由器地址是 192.168.0.1</p>
+<p>那么我们电脑的设置如下</p>
+<p>ip：192.168.0.19 （与其他设备不重复即可）<br>DNS：192.168.0.199<br>网关：192.168.0.199<br>子网掩码：255.255.255.0</p>
+<p>这样我们电脑的流量就走的是我们设置好的旁路由，打开浏览器好好体验吧</p>
+<blockquote>
+<p>声明：文章中所有内容仅供技术以及学习使用，不得违反国家法律。转载请联系作者</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Mr.Xun
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.mrxun.in/unraid-and-openwrt.html" title="unraid 折腾日记以及虚拟旁路由教程">https://www.mrxun.in/unraid-and-openwrt.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A5%AD/" rel="tag"># 技术饭</a>
+              <a href="/tags/unraid/" rel="tag"># unraid</a>
+              <a href="/tags/NAS/" rel="tag"># NAS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/docker-hello.html" rel="prev" title="运行 Docker 的 HelloWorld 以及一些基础的命令">
+      <i class="fa fa-chevron-left"></i> 运行 Docker 的 HelloWorld 以及一些基础的命令
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#unraid-%E5%9F%BA%E7%A1%80%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%80%E5%8D%95%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">unraid 基础安装和简单设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-openwrt-%E5%81%9A%E6%97%81%E8%B7%AF%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">安装 openwrt 做旁路由</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">创建虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">基础设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%99-openwrt-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">给 openwrt 安装插件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%99%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E5%86%85%E6%A0%B8"><span class="nav-number">3.1.</span> <span class="nav-text">给插件安装内核</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenClash-%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E6%95%99%E5%AD%A6"><span class="nav-number">4.</span> <span class="nav-text">OpenClash 简单配置教学</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">运行模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">添加配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%80%89%E9%A1%B9"><span class="nav-number">4.3.</span> <span class="nav-text">其他选项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%AD%E7%9A%84%E5%85%B6%E4%BB%96%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8%E6%97%81%E8%B7%AF%E7%94%B1%E7%BD%91%E7%BB%9C"><span class="nav-number">5.</span> <span class="nav-text">局域网中的其他设备使用旁路由网络</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.Xun"
+      src="/images/mrxun.jpg">
+  <p class="site-author-name" itemprop="name">Mr.Xun</p>
+  <div class="site-description" itemprop="description"><br/>风住尘香花已尽<br/>日晚倦梳头<br/>物是人非事事休<br/>欲语泪先流<br/>闻说双溪春尚好<br/>也拟泛轻舟<br/>只恐双溪舴艋舟<br/>载不动许多愁<br/></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:mrxun1997@163.com" title="E-Mail → mailto:mrxun1997@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mrxun_" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mrxun_" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Xun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">24k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">21 mins.</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'cQV13Bv6xGFVe0NhhEEtl37W-gzGzoHsz',
+      appKey     : 'fJhPrz7UkbBIQ2ok9VGpjfbh',
+      placeholder: "欢迎评论～",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
