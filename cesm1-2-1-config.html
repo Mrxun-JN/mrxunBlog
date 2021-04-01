@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.mrxun.in","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":300,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"expandIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CESM 1.x 版本现在使用者还是很多，最近对配置方面的理解有了进一步的了解，故写了一篇文章为大家解惑，如果有不正确的地方欢迎指正！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CESM 1.2.1 配置文件详解">
+<meta property="og:url" content="https://www.mrxun.in/cesm1-2-1-config.html">
+<meta property="og:site_name" content="MrXunのBlog">
+<meta property="og:description" content="CESM 1.x 版本现在使用者还是很多，最近对配置方面的理解有了进一步的了解，故写了一篇文章为大家解惑，如果有不正确的地方欢迎指正！">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-04-01T02:05:57.000Z">
+<meta property="article:modified_time" content="2021-04-01T02:06:49.100Z">
+<meta property="article:author" content="Mr.Xun">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="技术饭">
+<meta property="article:tag" content="CESM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.mrxun.in/cesm1-2-1-config.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>CESM 1.2.1 配置文件详解 | MrXunのBlog</title>
+  <meta name="baidu-site-verification" content="1EgGi05vUS" />
+  <meta name="google-site-verification" content="zhsGvkp16Fb3BzE1e2NzW6Q8OctoO38PxxH4ACFPUMM" />
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+  <script type="text/javascript" src="https://unpkg.com/minigrid@3.1.1/dist/minigrid.min.js"></script>
+  <script src="/js/src/photoswipe.min.js"></script>
+  <script src="/js/src/photoswipe-ui-default.js"></script>
+<link rel="alternate" href="/atom.xml" title="MrXunのBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MrXunのBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎光临</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-所有文章">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>所有文章</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/photos/" rel="section"><i class="fa fa-paw fa-fw"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://www.mrxun.in/cesm1-2-1-config.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/mrxun.jpg">
+      <meta itemprop="name" content="Mr.Xun">
+      <meta itemprop="description" content="<br/>风住尘香花已尽<br/>日晚倦梳头<br/>物是人非事事休<br/>欲语泪先流<br/>闻说双溪春尚好<br/>也拟泛轻舟<br/>只恐双溪舴艋舟<br/>载不动许多愁<br/>">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MrXunのBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CESM 1.2.1 配置文件详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-01 10:05:57 / Modified: 10:06:49" itemprop="dateCreated datePublished" datetime="2021-04-01T10:05:57+08:00">2021-04-01</time>
+            </span>
+
+          
+            <span id="/cesm1-2-1-config.html" class="post-meta-item leancloud_visitors" data-flag-title="CESM 1.2.1 配置文件详解" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/cesm1-2-1-config.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/cesm1-2-1-config.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>CESM 1.x 版本现在使用者还是很多，最近对配置方面的理解有了进一步的了解，故写了一篇文章为大家解惑，如果有不正确的地方欢迎指正！</p>
+<a id="more"></a>
+<h3 id="配置文件路径"><a href="#配置文件路径" class="headerlink" title="配置文件路径"></a>配置文件路径</h3><p>CESM 1.2 版本配置文件路径在 $CESM_ROOT/script/ccsm_utils/Machines</p>
+<h3 id="配置文件详解"><a href="#配置文件详解" class="headerlink" title="配置文件详解"></a>配置文件详解</h3><h4 id="config-machines-xml"><a href="#config-machines-xml" class="headerlink" title="config_machines.xml"></a>config_machines.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">machine</span> <span class="attr">MACH</span>=<span class="string">&quot;custom&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">DESC</span>&gt;</span>my defined<span class="tag">&lt;/<span class="name">DESC</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">OS</span>&gt;</span>LINUX<span class="tag">&lt;/<span class="name">OS</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">COMPILERS</span>&gt;</span>intel<span class="tag">&lt;/<span class="name">COMPILERS</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">MPILIBS</span>&gt;</span>impi<span class="tag">&lt;/<span class="name">MPILIBS</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">RUNDIR</span>&gt;</span>$ENV&#123;WORKDIR&#125;/cesm121_case_dir/$CASE/run<span class="tag">&lt;/<span class="name">RUNDIR</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">EXEROOT</span>&gt;</span>$ENV&#123;WORKDIR&#125;/cesm121_case_dir/$CASE/bld<span class="tag">&lt;/<span class="name">EXEROOT</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">DIN_LOC_ROOT</span>&gt;</span>/public/software/cesm/inputdata<span class="tag">&lt;/<span class="name">DIN_LOC_ROOT</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">DIN_LOC_ROOT_CLMFORC</span>&gt;</span>/public/software/cesm/ptclm-data<span class="tag">&lt;/<span class="name">DIN_LOC_ROOT_CLMFORC</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">DOUT_S_ROOT</span>&gt;</span>$ENV&#123;WORKDIR&#125;/cesm121_case_dir/CLMARCHIVE/$CASE<span class="tag">&lt;/<span class="name">DOUT_S_ROOT</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">BASELINE_ROOT</span>&gt;</span>$ENV&#123;WORKDIR&#125;/cesm_baselines<span class="tag">&lt;/<span class="name">BASELINE_ROOT</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">CCSM_CPRNC</span>&gt;</span>$ENV&#123;CESMROOT&#125;/tools/cprnc<span class="tag">&lt;/<span class="name">CCSM_CPRNC</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">BATCHQUERY</span>&gt;</span>qstat -f<span class="tag">&lt;/<span class="name">BATCHQUERY</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">BATCHSUBMIT</span>&gt;</span>qsub<span class="tag">&lt;/<span class="name">BATCHSUBMIT</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">GMAKE_J</span>&gt;</span>16<span class="tag">&lt;/<span class="name">GMAKE_J</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">MAX_TASKS_PER_NODE</span>&gt;</span>80<span class="tag">&lt;/<span class="name">MAX_TASKS_PER_NODE</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">PES_PER_NODE</span>&gt;</span>80<span class="tag">&lt;/<span class="name">PES_PER_NODE</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">SUPPORTED_BY</span>&gt;</span>me<span class="tag">&lt;/<span class="name">SUPPORTED_BY</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">machine</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里重点有下面几个方面：</p>
+<ol>
+<li>COMPILERS：一般大型服务器上都会部署 mpi 编译器，根据你的需求选择有 pgi，intel，gnu 等等</li>
+<li>MPILIBS：Intel 编译器一般选择 impi，gnu 可以搭配 openmpi，mpich，如果你不需要 mpi 这里就填 mpi-serial 即可</li>
+<li>DIN_LOC_ROOT：这个文件夹的位置可以选择一个固定的目录，这样所有的 inputdata 都会放在同一个文件夹中，方便后续使用</li>
+<li>DIN_LOC_ROOT_CLMFORC：同上</li>
+<li>BATCHQUERY和BATCHSUBMIT：如果你是普通的服务器没有部署作业调度系统这两项可以不填，直接把中间的内容删除，元素保留即可，一般大型服务器或超算上都会部署类似 slurm，pbs 或者 lsf 等等作业调度系统，还有部分作业调度系统是定制版本，这就需要联系系统管理员或者自己熟读用户手册之后再修改这两项</li>
+<li>GMAKE_J：编译时候可以并行的最大核数，这个数字填你使用的机器的 CPU 核数即可</li>
+<li>PES_PER_NODE 和 MAX_TASKS_PER_NODE：这两个数字需要视情况而定，如果你使用的机器是一般的服务器，没有计算节点这些东西的话直接填写机器的 CPU 核数即可；如果你使用的是大型服务器或超算则需要填写计算节点的 CPU 核数。如果这里填的数字超过你的 CPU 核数一般都是会再运行时报错</li>
+<li>RUNDIR、EXEROOT、DOUT_S_ROOT、BASELINE_ROOT：这些都是可以使用环境变量的形式填写，这样的好处是多人使用的时候方便每个人管理自己的 case</li>
+</ol>
+<h4 id="config-compilers-xml"><a href="#config-compilers-xml" class="headerlink" title="config_compilers.xml"></a>config_compilers.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">compiler</span> <span class="attr">COMPILER</span>=<span class="string">&quot;intel&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- http://software.intel.com/en-us/articles/intel-composer-xe/ --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ADD_CPPDEFS</span>&gt;</span> -DFORTRANUNDERSCORE -DNO_R16<span class="tag">&lt;/<span class="name">ADD_CPPDEFS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ADD_CFLAGS</span> <span class="attr">compile_threaded</span>=<span class="string">&quot;true&quot;</span>&gt;</span> -qopenmp <span class="tag">&lt;/<span class="name">ADD_CFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ADD_FFLAGS</span> <span class="attr">compile_threaded</span>=<span class="string">&quot;true&quot;</span>&gt;</span> -qopenmp <span class="tag">&lt;/<span class="name">ADD_FFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ADD_LDFLAGS</span> <span class="attr">compile_threaded</span>=<span class="string">&quot;true&quot;</span>&gt;</span> -qopenmp <span class="tag">&lt;/<span class="name">ADD_LDFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">FREEFLAGS</span>&gt;</span> -free <span class="tag">&lt;/<span class="name">FREEFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">FIXEDFLAGS</span>&gt;</span> -fixed -132 <span class="tag">&lt;/<span class="name">FIXEDFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ADD_FFLAGS</span> <span class="attr">DEBUG</span>=<span class="string">&quot;TRUE&quot;</span>&gt;</span> -g -CU -check pointers -fpe0 <span class="tag">&lt;/<span class="name">ADD_FFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">FFLAGS</span>&gt;</span> -O2 -fPIC -fp-model source -convert big_endian -assume byterecl -ftz -traceback <span class="tag">&lt;/<span class="name">FFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">CFLAGS</span>&gt;</span> -O2 -fPIC -fp-model precise <span class="tag">&lt;/<span class="name">CFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">FFLAGS_NOOPT</span>&gt;</span> -O0 <span class="tag">&lt;/<span class="name">FFLAGS_NOOPT</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">FC_AUTO_R8</span>&gt;</span> -r8 <span class="tag">&lt;/<span class="name">FC_AUTO_R8</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SFC</span>&gt;</span> ifort <span class="tag">&lt;/<span class="name">SFC</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SCC</span>&gt;</span> icc <span class="tag">&lt;/<span class="name">SCC</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SCXX</span>&gt;</span> icpc <span class="tag">&lt;/<span class="name">SCXX</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MPIFC</span>&gt;</span> mpiifort <span class="tag">&lt;/<span class="name">MPIFC</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MPICC</span>&gt;</span> mpiicc  <span class="tag">&lt;/<span class="name">MPICC</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">MPICXX</span>&gt;</span> mpiicpc <span class="tag">&lt;/<span class="name">MPICXX</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">CXX_LINKER</span>&gt;</span>FORTRAN<span class="tag">&lt;/<span class="name">CXX_LINKER</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">CXX_LDFLAGS</span>&gt;</span> -cxxlib <span class="tag">&lt;/<span class="name">CXX_LDFLAGS</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">SUPPORTS_CXX</span>&gt;</span>TRUE<span class="tag">&lt;/<span class="name">SUPPORTS_CXX</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ADD_SLIBS</span>&gt;</span>-L$ENV&#123;NETCDF_PATH&#125;/lib -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -ldl -lm -lz -lcurl -mkl=cluster<span class="tag">&lt;/<span class="name">ADD_SLIBS</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">compiler</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里重点有下面几个方面（以 Intel 编译器为例）：</p>
+<ol>
+<li>ADD_CFLAGS：这里原来是 -openmp，如果你使用的 Intel 编译器比较新（version &gt; 17），这里就需要修改为 -qopenmp</li>
+<li>下面的 MPIFC 等等：mpi 编译器需要修改为你需要使用的编译器，原来这里是 mpiicxx 等等，如果你使用的 Intel 编译器比较新（version &gt; 17），这里就需要修改为 mpiicpc</li>
+<li>ADD_SLIBS：这里一定要把 NetCDF 库的位置已经链接选项都添加上，否则在编译时一定会出错，如果只需要使用一个版本的 NetCDF （例如 4.1.3），那么这里的 $ENV{NETCDF_PATH} 可以换成固定的全路径即可<br>Tips：这里的 NetCDF 库包含的 zlib、szip、hdf5 等等，需要提前安装在同一个目录下，方便管理</li>
+</ol>
+<h4 id="mkbatch-custom"><a href="#mkbatch-custom" class="headerlink" title="mkbatch.custom"></a>mkbatch.custom</h4><p>如果你使用的服务器没有作业调度系统，那么这里直接随便复制一个原来的即可</p>
+<p>如果有作业调度系统，可以参考已经有的文件（mkbatch.xxxx），挑选一个符合你要求的复制一份再修改即可，这里因为每个机器配置不同不做赘述，如果有问题可以私聊</p>
+<h4 id="FAQs-（持续收集中-…-）"><a href="#FAQs-（持续收集中-…-）" class="headerlink" title="FAQs （持续收集中 … ）"></a>FAQs （持续收集中 … ）</h4><p>Q1: cesm 1.2.1  demo ./cesm_setup 报错  could not find restart file for branch or hybrid start<br>A1: 将 env_run.xml 中 RUN_TYPE 改为 startup 即可</p>
+<h3 id="如果你在运行过程中有任何问题欢迎留言或私信讨论！"><a href="#如果你在运行过程中有任何问题欢迎留言或私信讨论！" class="headerlink" title="如果你在运行过程中有任何问题欢迎留言或私信讨论！"></a>如果你在运行过程中有任何问题欢迎留言或私信讨论！</h3><p>ps：笔者也提供代安装服务，有需求的朋友可以添加微信 *<em>mrxun_ *</em>，添加时请备注来意，谢谢！</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Mr.Xun
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.mrxun.in/cesm1-2-1-config.html" title="CESM 1.2.1 配置文件详解">https://www.mrxun.in/cesm1-2-1-config.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF%E9%A5%AD/" rel="tag"># 技术饭</a>
+              <a href="/tags/CESM/" rel="tag"># CESM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/unraid-and-openwrt.html" rel="prev" title="unraid 折腾日记以及虚拟旁路由教程">
+      <i class="fa fa-chevron-left"></i> unraid 折腾日记以及虚拟旁路由教程
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="nav-number">1.</span> <span class="nav-text">配置文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#config-machines-xml"><span class="nav-number">2.1.</span> <span class="nav-text">config_machines.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#config-compilers-xml"><span class="nav-number">2.2.</span> <span class="nav-text">config_compilers.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mkbatch-custom"><span class="nav-number">2.3.</span> <span class="nav-text">mkbatch.custom</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FAQs-%EF%BC%88%E6%8C%81%E7%BB%AD%E6%94%B6%E9%9B%86%E4%B8%AD-%E2%80%A6-%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">FAQs （持续收集中 … ）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E5%9C%A8%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E6%9C%89%E4%BB%BB%E4%BD%95%E9%97%AE%E9%A2%98%E6%AC%A2%E8%BF%8E%E7%95%99%E8%A8%80%E6%88%96%E7%A7%81%E4%BF%A1%E8%AE%A8%E8%AE%BA%EF%BC%81"><span class="nav-number">3.</span> <span class="nav-text">如果你在运行过程中有任何问题欢迎留言或私信讨论！</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mr.Xun"
+      src="/images/mrxun.jpg">
+  <p class="site-author-name" itemprop="name">Mr.Xun</p>
+  <div class="site-description" itemprop="description"><br/>风住尘香花已尽<br/>日晚倦梳头<br/>物是人非事事休<br/>欲语泪先流<br/>闻说双溪春尚好<br/>也拟泛轻舟<br/>只恐双溪舴艋舟<br/>载不动许多愁<br/></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:mrxun1997@163.com" title="E-Mail → mailto:mrxun1997@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/mrxun_" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;mrxun_" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mr.Xun</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    <span title="Symbols count total">28k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">Reading time total &asymp;</span>
+    <span title="Reading time total">25 mins.</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'cQV13Bv6xGFVe0NhhEEtl37W-gzGzoHsz',
+      appKey     : 'fJhPrz7UkbBIQ2ok9VGpjfbh',
+      placeholder: "欢迎评论～",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
