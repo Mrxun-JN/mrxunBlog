@@ -29,7 +29,7 @@
 <h4 id="mkbatch-custom"><a href="#mkbatch-custom" class="headerlink" title="mkbatch.custom"></a>mkbatch.custom</h4><p>如果你使用的服务器没有作业调度系统，那么这里直接随便复制一个原来的即可</p>
 <p>如果有作业调度系统，可以参考已经有的文件（mkbatch.xxxx），挑选一个符合你要求的复制一份再修改即可，这里因为每个机器配置不同不做赘述，如果有问题可以私聊</p>
 <h4 id="FAQs-（持续收集中-…-）"><a href="#FAQs-（持续收集中-…-）" class="headerlink" title="FAQs （持续收集中 … ）"></a>FAQs （持续收集中 … ）</h4><p>Q1: cesm 1.2.1  demo ./cesm_setup 报错  could not find restart file for branch or hybrid start<br>A1: 将 env_run.xml 中 RUN_TYPE 改为 startup 即可</p>
-<h3 id="如果你在运行过程中有任何问题欢迎留言或私信讨论！"><a href="#如果你在运行过程中有任何问题欢迎留言或私信讨论！" class="headerlink" title="如果你在运行过程中有任何问题欢迎留言或私信讨论！"></a>如果你在运行过程中有任何问题欢迎留言或私信讨论！</h3><p>ps：笔者也提供代安装服务，有需求的朋友可以添加微信 *<em>mrxun_ *</em>，添加时请备注来意，谢谢！</p>
+<h3 id="如果你在运行过程中有任何问题欢迎留言或私信讨论！"><a href="#如果你在运行过程中有任何问题欢迎留言或私信讨论！" class="headerlink" title="如果你在运行过程中有任何问题欢迎留言或私信讨论！"></a>如果你在运行过程中有任何问题欢迎留言或私信讨论！</h3><p>ps：笔者也提供代安装服务，有需求的朋友可以添加微信 *mrxun_ *，添加时请备注来意，谢谢！</p>
 ]]></content>
       <tags>
         <tag>Linux</tag>
